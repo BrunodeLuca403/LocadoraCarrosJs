@@ -3,14 +3,41 @@ const Schema = mongoose.Schema;
 
 const CarroSchema = new Schema({
     IdCarro: Number,
-    Marca : String,
-    Modelo: String,
-    Ano: Number,
-    Tipo: String,
-    Cor: String,
-    Disponivel: String
+    Marca : { 
+        type: String, 
+        required : [true, "Marca do veículo é obrigatória!"]
+    },
+    Modelo: { 
+        type: String, 
+        required : [true, "Modelo do veículo é obrigatória!"]
+    },
+    Ano: { 
+        type: Number, 
+        required : [true, "Ano do veículo é obrigatória!"]
+    },
+    Tipo: { 
+        type: String, 
+        required : [true, "Tipo do veículo é obrigatória!"]
+    },
+    Cor: { 
+        type: String, 
+        required : [true, "Cor do veículo é obrigatória!"]
+    },
+    Disponivel: { 
+        type: String, 
+        required : [true, "Disponibilidade do veículo é obrigatória!"]
+    }
 
 });
+
+CarroSchema.pre('save', async function(next){
+    //Busca o objeto com o maior id no banco e gera novo id
+    const Model = mongoose.model('carro', CarroSchema);
+    const objMaxId = await Model.findOne().sort({'IdCarro': -1});
+    this.IdCarro = objMaxId == null ? 1 : objMaxId.IdCarro + 1;
+    next();
+  });
+  
 
 module.exports = mongoose.model('carro', CarroSchema);
 
