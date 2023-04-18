@@ -12,6 +12,10 @@ const PagamentoSchema = new Schema({
         type: Number, 
         required : [true, "Valor pago é obrigatória!"]
     },
+
+    locacao: { type: mongoose.Types.ObjectId,
+        ref: 'locacao'
+    }
 });
 
 PagamentoSchema.pre('save', async function(next){

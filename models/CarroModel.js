@@ -26,9 +26,13 @@ const CarroSchema = new Schema({
     Disponivel: { 
         type: String, 
         required : [true, "Disponibilidade do veículo é obrigatória!"]
-    }
+    },
+    locacoes : [LocacaoSchema]
 
-});
+}, { 
+    versionKey: false 
+  });
+
 
 CarroSchema.pre('save', async function(next){
     //Busca o objeto com o maior id no banco e gera novo id
