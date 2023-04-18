@@ -6,8 +6,7 @@ const LocacaoSchema = new Schema({
     //Carro : CarroModel,
     //Cliente: Cliente,
     DataInicio: { 
-        type: Date, 
-        required : [true, "Email do cliente é obrigatória!"]
+        type: Date, default: Date.now
     },
     DataFim: { 
         type: Date, 

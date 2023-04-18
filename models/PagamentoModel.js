@@ -24,8 +24,6 @@ PagamentoSchema.pre('save', async function(next){
 
 module.exports = mongoose.model('pagamento', PagamentoSchema);
 
-
-
 // this.id_pagamento = id_pagamento;
 // this.locacao = locacao;
 // this.tipo_pagamento = tipo_pagamento;
