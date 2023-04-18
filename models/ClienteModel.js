@@ -18,9 +18,12 @@ const ClienteSchema = new Schema({
     Email:  { 
         type: String, 
         required : [true, "Email do cliente é obrigatória!"]
-    }
+    },
+    locacoes : [LocacaoSchema]
 
-});
+}, { 
+    versionKey: false 
+  });
 
 ClienteSchema.pre('save', async function(next){
     //Busca o objeto com o maior id no banco e gera novo id
