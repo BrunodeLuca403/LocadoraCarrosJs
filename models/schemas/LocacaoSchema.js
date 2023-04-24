@@ -45,7 +45,9 @@ const LocacaoSchema = new Schema({
         ref: 'pagamento'
     }
     //Pagamento: String
-});
+}, { 
+    versionKey: false 
+  });
 
 LocacaoSchema.pre('save', async function(next){
     //Busca o objeto com o maior id no banco e gera novo id

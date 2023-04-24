@@ -1,7 +1,5 @@
-module.exports = mongoose.model('locacao', LocacaoSchema);
-
 const mongoose = require('mongoose');
-const LocacaoSchema = require('./schemas/LocadoraSchema');
+const LocacaoSchema = require('./schemas/LocacaoSchema');
 module.exports = mongoose.model('locacao', LocacaoSchema);
 
 
