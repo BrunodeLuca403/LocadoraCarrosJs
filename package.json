@@ -19,7 +19,7 @@
   "homepage": "https://gitlab.com/gilbriatore/2023/topicos3n/servidor#readme",
   "dependencies": {
     "express": "^4.18.2",
-    "mongoose": "^7.0.3",
+    "mongoose": "^7.2.2",
     "node": "^19.8.1"
   }
 }

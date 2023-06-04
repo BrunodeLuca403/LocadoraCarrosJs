@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const LocacaoSchema = require('./schemas/LocacaoSchema');
 const Schema = mongoose.Schema;
 
 const ClienteSchema = new Schema({
