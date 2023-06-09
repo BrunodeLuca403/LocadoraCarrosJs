@@ -1,4 +1,4 @@
-const ClienteModel = require('../models/ClienteModel');
+const ClienteModel = require('../models/ClienteModel').ClienteModel;
 
 class ClienteController {
 
@@ -8,32 +8,30 @@ class ClienteController {
     }
 
     async buscarPorId(req, res){
-        const idcliente = req.params.idcliente;
-        const cliente = await ClienteModel.findOne({'idcliente': idcliente});
+        const id = req.params.id;
+        const cliente = await ClienteModel.findOne({'_id': id});
         res.json(cliente);
     }
 
     async salvarCliente(req, res) {            
         const cliente = req.body;
-        const max = await ClienteModel.findOne({}).sort({'idCliente': -1});
-        cliente.idCliente = max == null ? 1 : max.idcliente + 1;
         const resultado = await ClienteModel.create(cliente);
         res.json(resultado);
     }
 
+
     async atualizarCliente(req, res){
-        const idCliente = req.params.idCliente;
-        const conteudo = req.body;
-        const filtro = {'idcliente': idCliente};        
-        const resultado = await ClienteModel.findOneAndUpdate(filtro, conteudo, {new: true});
+        const id = req.params.id;
+        const cliente = req.body;      
+        const resultado = await ClienteModel.findOneAndUpdate({'_id': id}, cliente, {new: true});
         res.json(resultado);
     }
 
+
     async excluirCliente(req, res){
-      const idCliente = req.params.idCliente;
-      const filtro = {'idCliente': idCliente};
-      await ClienteModel.findOneAndDelete(filtro);
-      res.send("Cliente excluído com sucesso!");
+      const id = req.params.id;
+      await ClienteModel.findOneAndDelete({'_id': id});
+      res.send("Excluído(a) com sucesso!");
     }
 }
 

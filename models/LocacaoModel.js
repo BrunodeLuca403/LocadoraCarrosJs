@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 const LocacaoSchema = require('./schemas/LocacaoSchema');
-module.exports = mongoose.model('locacao', LocacaoSchema);
+module.exports = {
+    LocacaoSchema: LocacaoSchema,
+    LocacaoModel: mongoose.model('locacao', LocacaoSchema)
+  }
 
 
 // this.id_locacao = id_locacao;

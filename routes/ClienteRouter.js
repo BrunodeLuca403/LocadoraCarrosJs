@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', ClienteController.listarCliente);
-router.get('/:idCliente', ClienteController.buscarPorId);
+router.get('/:id', ClienteController.buscarPorId);
 router.post('/', ClienteController.salvarCliente);
-router.put('/:idCliente', ClienteController.atualizarCliente);
-router.delete('/:idCliente', ClienteController.excluirCliente);
+router.put('/:id', ClienteController.atualizarCliente);
+router.delete('/:id', ClienteController.excluirCliente);
 
 module.exports = router;

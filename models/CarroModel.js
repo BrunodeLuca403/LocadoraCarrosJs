@@ -3,30 +3,30 @@ const LocacaoSchema = require('./schemas/LocacaoSchema');
 const Schema = mongoose.Schema;
 
 const CarroSchema = new Schema({
-    IdCarro: Number,
+    _id: { type: Number, required: true, default: -1 },
     Marca : { 
         type: String, 
-        required : [true, "Marca do veículo é obrigatória!"]
+        // required : [true, "Marca do veículo é obrigatória!"]
     },
     Modelo: { 
         type: String, 
-        required : [true, "Modelo do veículo é obrigatória!"]
+        // required : [true, "Modelo do veículo é obrigatória!"]
     },
     Ano: { 
         type: Number, 
-        required : [true, "Ano do veículo é obrigatória!"]
+        // required : [true, "Ano do veículo é obrigatória!"]
     },
     Tipo: { 
         type: String, 
-        required : [true, "Tipo do veículo é obrigatória!"]
+        // required : [true, "Tipo do veículo é obrigatória!"]
     },
     Cor: { 
         type: String, 
-        required : [true, "Cor do veículo é obrigatória!"]
+        // required : [true, "Cor do veículo é obrigatória!"]
     },
     Disponivel: { 
         type: String, 
-        required : [true, "Disponibilidade do veículo é obrigatória!"]
+        // required : [true, "Disponibilidade do veículo é obrigatória!"]
     },
     locacoes : [LocacaoSchema]
 
@@ -35,16 +35,20 @@ const CarroSchema = new Schema({
   });
 
 
-CarroSchema.pre('save', async function(next){
+  CarroSchema.pre('save', async function(next){
     //Busca o objeto com o maior id no banco e gera novo id
-    const Model = mongoose.model('carro', CarroSchema);
-    const objMaxId = await Model.findOne().sort({'IdCarro': -1});
-    this.IdCarro = objMaxId == null ? 1 : objMaxId.IdCarro + 1;
-    next();
+    if (this._id < 1){
+        const Model = mongoose.model('carro', CarroSchema);
+        const objMaxId = await Model.findOne().sort({'_id': -1});
+        this._id = objMaxId == null ? 1 : objMaxId._id + 1;
+        next();
+    }
   });
   
-
-module.exports = mongoose.model('carro', CarroSchema);
+module.exports = {
+    CarroSchema: CarroSchema,
+    CarroModel: mongoose.model('carro', CarroSchema)
+  }
 
 // this.id_carro = id_carro;
 // this.marca = marca;

@@ -4,9 +4,9 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', PagamentoController.listarPagamento);
-router.get('/:idPagamento', PagamentoController.buscarPorId);
+router.get('/:id', PagamentoController.buscarPorId);
 router.post('/', PagamentoController.salvarPagamento);
-router.put('/:idPagamento', PagamentoController.atualizarPagamento);
-router.delete('/:idPagamento', PagamentoController.excluirPagamento);
+router.put('/:id', PagamentoController.atualizarPagamento);
+router.delete('/:id', PagamentoController.excluirPagamento);
 
 module.exports = router;

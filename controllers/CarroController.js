@@ -1,4 +1,4 @@
-const CarroModel = require('../models/CarroModel');
+const CarroModel = require('../models/CarroModel').CarroModel;
 
 class CarroController {
 
@@ -8,32 +8,28 @@ class CarroController {
     }
 
     async buscarPorId(req, res){
-        const idcarro = req.params.idcarro;
-        const carro = await CarroModel.findOne({'idcarro': idcarro});
+        const id = req.params.id;
+        const carro = await CarroModel.findOne({'_id': id});
         res.json(carro);
     }
 
     async salvarCarro(req, res) {            
         const carro = req.body;
-        const max = await CarroModel.findOne({}).sort({'idCarro': -1});
-        carro.idCarro = max == null ? 1 : max.idCarro + 1;
         const resultado = await CarroModel.create(carro);
         res.json(resultado);
     }
 
     async atualizarCarro(req, res){
-        const idCarro = req.params.idcarro;
-        const conteudo = req.body;
-        const filtro = {'idCarro': idCarro};        
-        const resultado = await CarroModel.findOneAndUpdate(filtro, conteudo, {new: true});
+        const id = req.params.id;
+        const carro = req.body;      
+        const resultado = await CarroModel.findOneAndUpdate({'_id': id}, carro, {new: true});
         res.json(resultado);
     }
 
     async excluirCarro(req, res){
-      const idcarro = req.params.idcarro;
-      const filtro = {'idcarro': idcarro};
-      await CarroModel.findOneAndDelete(filtro);
-      res.send("Carro excluído com sucesso!");
+      const id = req.params.id;
+      await CarroModel.findOneAndDelete({'_id': id});
+      res.send("Excluído(a) com sucesso!");
     }
 }
 

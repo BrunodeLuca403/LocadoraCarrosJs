@@ -1,4 +1,4 @@
-const LocacaoModel = require('../models/LocacaoModel');
+const LocacaoModel = require('../models/LocacaoModel').LocacaoModel;
 
 class LocacaoController {
 
@@ -8,32 +8,28 @@ class LocacaoController {
     }
 
     async buscarPorId(req, res){
-        const idLocacao = req.params.idLocacao;
-        const locacao = await LocacaoModel.findOne({'idLocacao': idLocacao});
+        const id = req.params.id;
+        const locacao = await LocacaoModel.findOne({'_id': id});
         res.json(locacao);
     }
 
     async salvarLocacao(req, res) {            
         const locacao = req.body;
-        const max = await LocacaoModel.findOne({}).sort({'idLocacao': -1});
-        locacao.idLocacao = max == null ? 1 : max.idLocacao + 1;
         const resultado = await LocacaoModel.create(locacao);
         res.json(resultado);
     }
 
     async atualizarLocacao(req, res){
-        const idLocacao = req.params.idLocacao;
-        const conteudo = req.body;
-        const filtro = {'idLocacao': idLocacao};        
-        const resultado = await LocacaoModel.findOneAndUpdate(filtro, conteudo, {new: true});
+        const id = req.params.id;
+        const locacao = req.body;      
+        const resultado = await LocacaoModel.findOneAndUpdate({'_id': id}, locacao, {new: true});
         res.json(resultado);
     }
 
     async excluirLocacao(req, res){
-      const idLocacao = req.params.idLocacao;
-      const filtro = {'idLocacao': idLocacao};
-      await LocacaoModel.findOneAndDelete(filtro);
-      res.send("Locação excluído com sucesso!");
+      const id = req.params.id;
+      await LocacaoModel.findOneAndDelete({'_id': id});
+      res.send("Excluído(a) com sucesso!");
     }
 }
 
