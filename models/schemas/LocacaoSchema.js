@@ -7,7 +7,7 @@ const LocacaoSchema = new Schema({
         type: Date, default: Date.now
     },
     DataFim: { 
-        type: Date, 
+        type: String, 
     },
     KmInicial: { 
         type: Number,
@@ -25,15 +25,16 @@ const LocacaoSchema = new Schema({
         type: Number, 
     },
 
-    cliente:{type: mongoose.Types.ObjectId, 
-        ref: 'cliente'
+    clientes: { 
+        type: String, 
+        ref: 'cliente' 
+    },
+    carros: { 
+        type: String, 
+        ref: 'carro' 
     },
 
-    carro: { type: mongoose.Types.ObjectId,
-        ref: 'carro'
-    },
-
-    pagamento: { type: mongoose.Types.ObjectId,
+    pagamentos: { String,
         ref: 'pagamento'
     }
     //Pagamento: String
