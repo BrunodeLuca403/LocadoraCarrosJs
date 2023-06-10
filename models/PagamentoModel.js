@@ -6,11 +6,9 @@ const PagamentoSchema = new Schema({
    // Locacao : String,
     TipoPagamento: { 
         type: String, 
-        required : [true, "Tipo pagamento é obrigatória!"]
     },
     ValorPago: { 
         type: Number, 
-        required : [true, "Valor pago é obrigatória!"]
     },
 
     locacao: { type: mongoose.Types.ObjectId,
