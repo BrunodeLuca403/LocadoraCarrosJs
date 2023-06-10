@@ -11,7 +11,8 @@ const PagamentoSchema = new Schema({
         type: Number, 
     },
 
-    locacao: { type: mongoose.Types.ObjectId,
+    locacao: { 
+        type: String,
         ref: 'locacao'
     }
 });

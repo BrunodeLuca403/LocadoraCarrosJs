@@ -34,7 +34,8 @@ const LocacaoSchema = new Schema({
         ref: 'carro' 
     },
 
-    pagamentos: { String,
+    pagamentos: { 
+        type: String,
         ref: 'pagamento'
     }
     //Pagamento: String
